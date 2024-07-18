@@ -31,4 +31,4 @@ const Badge: React.FC<BadgeProps> = ({ message, type = 'info', icon, onClose, ba
     );
 };
 
-export {Badge};
+export default Badge;

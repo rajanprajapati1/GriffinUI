@@ -1,6 +1,6 @@
 {
     "name": "griffinui",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Griffin UI is a versatile component library designed for React, Next.js, and other React frameworks. It provides a collection of reusable, high-quality UI components to help developers build modern, responsive, and visually appealing web applications with ease.",
     "main": "dist/index.js",
     "module": "dist/index.mjs",

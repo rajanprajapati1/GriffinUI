@@ -1,0 +1,40 @@
+# Griffin UI
+
+Griffin UI is a versatile component library designed for React, Next.js, and other React frameworks. It provides a collection of reusable, high-quality UI components to help developers build modern, responsive, and visually appealing web applications with ease.
+
+## Installation
+
+You can install Griffin UI via npm or yarn.
+
+### npm
+
+```bash
+npm install griffinui
+```
+
+### yarn
+
+```bash
+yarn add griffinui
+```
+
+## Usage
+
+Once installed, import the components you need and start using them in your application:
+
+```javascript
+import { SkeletonLine } from 'griffinui';
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome to Griffin UI!</h1>
+   <SkeletonLine width="100px" lines='3'/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+For detailed documentation and component customization options, refer to the [Griffin UI Documentation]
