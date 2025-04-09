@@ -1,49 +1,38 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
-import terser from "@rollup/plugin-terser";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import postcss from "rollup-plugin-postcss";
-import packageJson from "./package.json";
+import external from 'rollup-plugin-peer-deps-external';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from 'rollup-plugin-typescript2';
+import postcss from 'rollup-plugin-postcss';
 
-export default [
-  {
-    input: "src/index.ts",
-    output: [
-      {
-        file: packageJson.main,
-        format: "cjs",
-        sourcemap: true,
+export default {
+  input: 'src/index.ts',
+  output: [
+    {
+      file: 'dist/index.cjs.js',
+      format: 'cjs',
+      sourcemap: true
+    },
+    {
+      file: 'dist/index.es.js',
+      format: 'es',
+      sourcemap: true
+    }
+  ],
+  plugins: [
+    external(), // 👈 This ensures peer deps like react are not bundled
+    resolve(),
+    commonjs(),
+    typescript({
+      useTsconfigDeclarationDir: true
+    }),
+    postcss({
+      inject: true, // 👈 this will inject CSS directly into JS
+      extract: true,
+      modules: false,
+      config: {
+        path: './postcss.config.cjs',
       },
-      {
-        file: packageJson.module,
-        format: "esm",
-        sourcemap: true,
-      },
-    ],
-    plugins: [
-      peerDepsExternal(),
-      resolve(),
-      commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
-      terser(),
-      postcss({
-        extract: true,
-        minimize: true,
-        use: [
-          ['sass', {
-            includePaths: ['./src/index']
-          }],
-        ],
-      }),
-    ],
-    external: ["react", "react-dom"],
-  },
-  {
-    input: "src/index.ts",
-    output: [{ file: packageJson.types }],
-    plugins: [dts.default()],
-    external: [/\.css$/],
-  },
-];
+    }),  
+    
+  ]
+};
